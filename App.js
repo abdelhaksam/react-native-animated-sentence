@@ -17,12 +17,12 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar hidden />
       <AnimatedText
-        content='For the things we have to learn before we can do them, we learn by doing them. ️️️️️️REACT NATIVE ❤️️️️'
         textStyle={styles.textStyle}
         style={styles.containerStyle}
         duration={500}
-        onFinish={_onFinish}
-      />
+        onFinish={_onFinish}>
+          For the things we have to learn before we can do them, we learn by doing them. ️️️️️️REACT NATIVE ❤️️️️
+      </AnimatedText>
     </View>
   );
 }

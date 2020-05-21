@@ -7,7 +7,7 @@ export default class AnimatedText extends React.Component {
   constructor(props) {
     super(props);
 
-    const textArr = props.content.trim().split(' ');
+    const textArr = props.children.trim().split(' ');
     textArr.forEach((_, i) => {
       this.animatedValues[i] = new Animated.Value(0);
     });
