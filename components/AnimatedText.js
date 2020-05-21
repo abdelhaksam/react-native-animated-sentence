@@ -13,6 +13,7 @@ export default class AnimatedText extends React.Component {
     });
     this.textArr = textArr;
   }
+  
 
   componentDidMount() {
     this.initAnimation();
@@ -20,22 +21,31 @@ export default class AnimatedText extends React.Component {
   }
 
   initAnimation = () => {
+    //A big stagger factor makes the text fade, a small one makes each word display alone.
+    const staggerFactor = this.props.staggerFactor || this.textArr.length * 0.1
+
+    //The prop wordDuration ovverides the total duration
+    const singleAnimationDuration = this.props.wordDuration || this.props.duration * (staggerFactor/(this.textArr.length+staggerFactor))
+    const staggerAnimationDuration = singleAnimationDuration/staggerFactor
+    
+
     const animations = this.textArr.map((_, i) => {
       return Animated.timing(this.animatedValues[i], {
         toValue: 1,
-        duration: this.props.duration,
+        duration: singleAnimationDuration,
         useNativeDriver: true
       });
     });
 
     this.staggeredAnim = Animated.stagger(
-      this.props.duration / 5, animations
+      staggerAnimationDuration, 
+      animations
     )
   };
 
   animate = () => {
     this.staggeredAnim.start(() => {
-      setTimeout(() => this.initAnimation(), 1000);
+      this.initAnimation()
       if (this.props.onFinish) {
         this.props.onFinish();
       }

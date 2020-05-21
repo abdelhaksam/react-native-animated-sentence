@@ -7,10 +7,12 @@ export default function App() {
   const _onFinish = () => {
     // Alert.alert('Animation', 'It is done!');
     console.log('animation done')
+    console.log(new Date() - this.mount)
   };
 
   React.useEffect(()=>{
     console.log('did mount')
+    this.mount = new Date()
   },[])
 
   return (
@@ -19,7 +21,7 @@ export default function App() {
       <AnimatedText
         textStyle={styles.textStyle}
         style={styles.containerStyle}
-        duration={500}
+        duration={5000}
         onFinish={_onFinish}>
           For the things we have to learn before we can do them, we learn by doing them. ️️️️️️REACT NATIVE ❤️️️️
       </AnimatedText>
