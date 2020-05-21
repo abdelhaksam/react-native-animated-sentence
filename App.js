@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 28,
     fontWeight: 'bold',
-    fontFamily: 'Menlo',
     marginBottom: 14
   }
 });

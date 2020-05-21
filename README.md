@@ -22,3 +22,8 @@ You can find me on:
 
 - Github: http://github.com/catalinmiron
 - Twitter: http://twitter.com/mironcatalin
+
+--------
+Forked from https://github.com/catalinmiron/react-native-animated-sentence
+
+
