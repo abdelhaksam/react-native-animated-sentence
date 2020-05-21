@@ -52,7 +52,7 @@ export default class TextAnimator extends React.Component {
                     {
                       translateY: Animated.multiply(
                         this.animatedValues[index],
-                        new Animated.Value(-5)
+                        new Animated.Value(-1)
                       )
                     }
                   ]
