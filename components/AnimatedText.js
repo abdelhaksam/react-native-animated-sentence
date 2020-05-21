@@ -53,14 +53,20 @@ export default class AnimatedText extends React.Component {
   }
 
   render() {
+    const {style, rtl, textStyle} = this.props 
+    const textWraperStyle=[
+      style, 
+      styles.textWrapper, 
+      {flexDirection: rtl  ? 'row-reverse' : 'row'}
+    ]
     return (
-      <View style={[this.props.style, styles.textWrapper]}>
+      <View style={textWraperStyle}>
         {this.textArr.map((word, index) => {
           return (
             <Animated.Text
               key={`${word}-${index}`}
               style={[
-                this.props.textStyle,
+                textStyle,
                 {
                   opacity: this.animatedValues[index],
                   transform: [
@@ -74,8 +80,9 @@ export default class AnimatedText extends React.Component {
                 }
               ]}
             >
+              {rtl && index < this.textArr.length ? ' ' : ''}
               {word}
-              {`${index < this.textArr.length ? ' ' : ''}`}
+              {rtl || index < this.textArr.length ? ' ' : ''}
             </Animated.Text>
           );
         })}
@@ -88,10 +95,7 @@ export default class AnimatedText extends React.Component {
 
 const styles = StyleSheet.create({
   textWrapper: {
-    flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center'
+    justifyContent: 'center',
   }
 });
-
-
