@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Animated } from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 
-export default class TextAnimator extends React.Component {
+export default class AnimatedText extends React.Component {
   animatedValues = [];
 
   constructor(props) {
@@ -15,10 +15,11 @@ export default class TextAnimator extends React.Component {
   }
 
   componentDidMount() {
-    this.animated();
+    this.initAnimation();
+    this.animate()
   }
 
-  animated = () => {
+  initAnimation = () => {
     const animations = this.textArr.map((_, i) => {
       return Animated.timing(this.animatedValues[i], {
         toValue: 1,
@@ -27,15 +28,19 @@ export default class TextAnimator extends React.Component {
       });
     });
 
-    Animated.stagger(
+    this.staggeredAnim = Animated.stagger(
       this.props.duration / 5, animations
-    ).start(() => {
-      setTimeout(() => this.animated(1), 1000);
+    )
+  };
+
+  animate = () => {
+    this.staggeredAnim.start(() => {
+      setTimeout(() => this.initAnimation(), 1000);
       if (this.props.onFinish) {
         this.props.onFinish();
       }
     });
-  };
+  }
 
   render() {
     return (
@@ -67,7 +72,9 @@ export default class TextAnimator extends React.Component {
       </View>
     );
   }
+
 }
+
 
 const styles = StyleSheet.create({
   textWrapper: {
@@ -76,3 +83,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+
